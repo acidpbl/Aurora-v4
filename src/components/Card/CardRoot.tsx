@@ -49,7 +49,7 @@ export function CardRoot({ title = "title", ...props }: CardRootProps) {
           "rounded-xl flex flex-col items-center gap-4 py-4 px-12 font-poppins font-medium"
         )}
       >
-        <span className={twMerge(titleStyle, "ease-linear transition-all")}>
+        <span className={titleStyle}>
           {capitalize(title)}
         </span>
         {props.children}

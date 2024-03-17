@@ -7,6 +7,10 @@
 * {
   margin: 0;
   padding: 0;
+  transition-timing-function: linear;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 body.dark {

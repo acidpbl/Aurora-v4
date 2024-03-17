@@ -15,7 +15,7 @@ export function Timer() {
   return (
     <span
       className={twMerge(
-        "w-full flex justify-center rounded-md text-5xl py-8 transition-all ease-linear select-none",
+        "w-full flex justify-center rounded-md text-5xl py-8 select-none",
         themeStyle
       )}
     >
