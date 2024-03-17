@@ -3,12 +3,12 @@ import { IconType } from "react-icons";
 import themeContext from "../../ThemeContext";
 import { twMerge } from "tailwind-merge";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: { toggle: IconType; toggled: IconType };
   toggled: boolean;
 }
 
-export function Button({ toggled = false, icon: Icon, ...props }: ButtonProps) {
+export function Toggle({ toggled = false, icon: Icon, ...props }: ToggleProps) {
   const theme = useContext(themeContext);
 
   let btnStyle;

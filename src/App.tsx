@@ -1,6 +1,7 @@
 import {
   PiBroomFill,
   PiCopyFill,
+  PiGlobeFill,
   PiFloppyDiskFill,
   PiMoonFill,
   PiPauseFill,
@@ -13,15 +14,13 @@ import { Clock } from "./components/Clock";
 import { Stopwatch } from "./components/Stopwatch";
 import { SettingsCard } from "./components/SettingsCard";
 import themeContext from "./ThemeContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useStopwatch } from "./components/Stopwatch/useStopwatch";
-import stopwatchContext from "./components/Stopwatch/StopwatchContext";
-import { twMerge } from "tailwind-merge";
 import { Divider } from "./components/Divider";
+import { BR, ES, US } from "country-flag-icons/react/1x1";
 
 function App() {
   const themeCtx = useContext(themeContext);
-  const stopwatchCtx = useContext(stopwatchContext);
 
   const stopwatch = useStopwatch();
 
@@ -44,13 +43,22 @@ function App() {
       <div className="flex justify-center">
         <div className="w-[calc(96*4px*3+32px)] flex flex-wrap justify-start items-center py-4 gap-4">
           <SettingsCard.Root>
-            <SettingsCard.Button
+            <SettingsCard.Dropdown
+              options={[
+                { icon: US, value: "english" },
+                { icon: BR, value: "portuguese" },
+                { icon: ES, value: "spanish" },
+              ]}
+              defaultOption={{ icon: US, value: "english" }}
+              icon={PiGlobeFill}
+            ></SettingsCard.Dropdown>
+            <SettingsCard.Toggle
               icon={{ toggle: PiMoonFill, toggled: PiSunFill }}
               toggled={theme == "light" ? false : true}
               onClick={() => {
                 handleTheme();
               }}
-            ></SettingsCard.Button>
+            />
           </SettingsCard.Root>
           <Card.Root variant="sm" title="calendar">
             <></>

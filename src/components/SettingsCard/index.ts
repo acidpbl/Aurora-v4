@@ -1,7 +1,9 @@
-import { Button } from "./Button";
+import { Toggle } from "./Toggle";
 import { Card } from "./Card";
+import { DropdownMenu } from "./Dropdown";
 
 export const SettingsCard = {
   Root: Card,
-  Button: Button,
+  Toggle: Toggle,
+  Dropdown: DropdownMenu,
 };

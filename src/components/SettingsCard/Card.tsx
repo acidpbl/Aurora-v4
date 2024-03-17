@@ -1,6 +1,8 @@
 import { ReactNode, useContext } from "react";
 import { twMerge } from "tailwind-merge";
 import themeContext from "../../ThemeContext";
+import { Icon } from "./Icon";
+import { PiGearFill } from "react-icons/pi";
 
 interface CardProps {
   children: ReactNode;
@@ -26,10 +28,16 @@ export function Card(props: CardProps) {
         cardStyle
       )}
     >
-      <span className={twMerge(titleStyle, "font-poppins font-medium text-sm cursor-default select-none")}>
+      <span
+        className={twMerge(
+          titleStyle,
+          "font-poppins font-medium text-sm cursor-default select-none flex items-center gap-2"
+        )}
+      >
+        <Icon icon={PiGearFill} />
         Settings
       </span>
-      <div className="h-full flex ">{props.children}</div>
+      <div className="h-full flex gap-2">{props.children}</div>
     </div>
   );
 }
