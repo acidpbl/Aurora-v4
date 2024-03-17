@@ -16,6 +16,8 @@ import themeContext from "./ThemeContext";
 import { useContext, useEffect, useState } from "react";
 import { useStopwatch } from "./components/Stopwatch/useStopwatch";
 import stopwatchContext from "./components/Stopwatch/StopwatchContext";
+import { twMerge } from "tailwind-merge";
+import { Divider } from "./components/Divider";
 
 function App() {
   const themeCtx = useContext(themeContext);
@@ -37,13 +39,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      console.log(stopwatchCtx.value);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <themeContext.Provider value={theme}>
       <div className="flex justify-center">
@@ -61,9 +56,10 @@ function App() {
             <></>
           </Card.Root>
           <Card.Root variant="sm" title="clock">
-            <div className="w-full h-full flex flex-col gap-12">
+            <div className="w-full h-full flex flex-col gap-4">
               <Clock.Time />
-              <div className="w-full flex flex-col items-center">
+              <Divider direction="h" />
+              <div className="w-full h-full flex flex-col items-center gap-4">
                 <Clock.Weekday />
                 <Clock.Date />
               </div>
@@ -72,10 +68,11 @@ function App() {
           <Card.Root variant="sm" title="timer">
             <div className="w-full h-full flex flex-col gap-4">
               <Stopwatch.Timer />
+              <Divider direction="h" />
               <Stopwatch.Watched />
               <div className="flex justify-between">
                 <Stopwatch.Action.Toggle
-                  toggled
+                  toggled={false}
                   icon={{ toggle: PiPlayFill, toggled: PiPauseFill }}
                   variant="primary"
                   onClick={() => stopwatch.actions.handleStopwatch()}

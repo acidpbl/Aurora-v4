@@ -14,11 +14,11 @@ export function CardRoot({ title = "title", ...props }: CardRootProps) {
   let variant, cardStyle, titleStyle;
 
   if (theme == "light") {
-    cardStyle = "bg-violet-200 shadow shadow-violet-500";
+    cardStyle = "bg-violet-200";
     titleStyle = "text-neutral-900 hover:text-violet-800";
   }
   if (theme == "dark") {
-    cardStyle = "bg-neutral-950 shadow shadow-neutral-900";
+    cardStyle = "bg-neutral-950";
     titleStyle = "text-violet-600 hover:text-violet-500";
   }
 
@@ -46,10 +46,15 @@ export function CardRoot({ title = "title", ...props }: CardRootProps) {
         className={twMerge(
           variant,
           cardStyle,
-          "rounded-xl flex flex-col items-center gap-4 py-4 px-12 font-poppins font-medium"
+          "rounded-xl flex flex-col items-center gap-4 py-4 px-12 font-poppins font-medium transition-all ease-linear"
         )}
       >
-        <span className={titleStyle}>
+        <span
+          className={twMerge(
+            titleStyle,
+            "cursor-default select-none transition-all ease-linear"
+          )}
+        >
           {capitalize(title)}
         </span>
         {props.children}

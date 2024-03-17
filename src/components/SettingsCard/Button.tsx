@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, useContext } from "react";
 import { IconType } from "react-icons";
 import themeContext from "../../ThemeContext";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: { toggle: IconType; toggled: IconType };
@@ -12,16 +13,19 @@ export function Button({ toggled = false, icon: Icon, ...props }: ButtonProps) {
 
   let btnStyle;
 
-  if (theme === "light") btnStyle = "p-1 rounded bg-violet-300";
-  if (theme === "dark") btnStyle = "p-1 rounded bg-neutral-800";
+  if (theme === "light")
+    btnStyle =
+      "bg-violet-300 text-violet-200 hover: bg-violet-400 hover:text-violet-100";
+  if (theme === "dark")
+    btnStyle =
+      "bg-neutral-800 text-violet-600 hover: bg-neutral-900 hover:text-violet-900";
 
   return (
-    <button className={btnStyle} {...props}>
-      {toggled ? (
-        <Icon.toggled className="text-violet-200" />
-      ) : (
-        <Icon.toggle className="text-violet-600" />
-      )}
+    <button
+      className={twMerge(btnStyle, "p-1 rounded transition-all ease-linear")}
+      {...props}
+    >
+      {toggled ? <Icon.toggled /> : <Icon.toggle />}
     </button>
   );
 }

@@ -41,12 +41,17 @@ export function TodayDate({}: TodayDateProps) {
   const theme = useContext(themeContext);
   let themeStyle;
 
-  if (theme == "light") themeStyle = "text-violet-600"
+  if (theme == "light") themeStyle = "text-violet-600";
   if (theme == "dark") themeStyle = "text-violet-400";
 
   return (
-    <span className={twMerge("text-2xl", themeStyle)}>
-      {`${date.today} ${months[date.month]}, ${date.year}`}
-    </span>
+    <div className="flex flex-col">
+      <span className={twMerge("text-2xl text-center", themeStyle)}>
+        {`${date.today} ${months[date.month]}`}
+      </span>
+      <span className={twMerge("text-lg text-center", themeStyle)}>
+        {`${date.year}`}
+      </span>
+    </div>
   );
 }

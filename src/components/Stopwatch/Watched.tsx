@@ -17,7 +17,7 @@ export function Watched() {
   return (
     <div
       className={twMerge(
-        "flex flex-col w-full min-h-16 max-h-16 rounded p-4 overflow-y-scroll gap-1",
+        "flex flex-col w-full min-h-16 max-h-16 rounded p-4 overflow-y-scroll gap-1 transition-all ease-linear cursor-default",
         themeStyle
       )}
     >
