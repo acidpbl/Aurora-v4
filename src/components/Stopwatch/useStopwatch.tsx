@@ -20,8 +20,7 @@ export function useStopwatch() {
   }
 
   function saveTime() {
-    if (savedTime.includes(formatTime(time))) return;
-    savedTime.push(formatTime(time));
+    setSavedTime((oldArr) => [...oldArr, formatTime(time)]);
   }
 
   function clearSavedTime() {

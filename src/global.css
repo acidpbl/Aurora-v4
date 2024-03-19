@@ -23,3 +23,31 @@ body.dark {
 body.light {
   background-color: theme(colors.violet.400);
 }
+
+body.light *::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.light *::-webkit-scrollbar-track {
+  background: theme(colors.violet.800);
+  border-radius: 4px;
+}
+
+body.light *::-webkit-scrollbar-thumb {
+  background-color: theme(colors.violet.400);
+  border-radius: 4px;
+}
+
+body.dark *::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.dark *::-webkit-scrollbar-track {
+  background: theme(colors.violet.400);
+  border-radius: 4px;
+}
+
+body.dark *::-webkit-scrollbar-thumb {
+  background-color: theme(colors.violet.800);
+  border-radius: 4px;
+}

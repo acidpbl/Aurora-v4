@@ -44,7 +44,7 @@ export function Days(props: DaysProps) {
           <button
             key={index}
             className={twMerge(
-              "text-center p-1.5 cursor-pointer ease-linear transition-all hover:bg-violet-600 hover:text-violet-800 hover:font-semibold",
+              "text-center p-1.5 cursor-pointer ease-linear transition-all hover:bg-violet-600 hover:text-violet-800 hover:font-semibold hover:rounded",
               d.class === "inactive" ? inactiveStyle : daysStyle,
               d.isCurrentDay && currentStyle
             )}
