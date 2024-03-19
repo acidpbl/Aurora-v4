@@ -8,7 +8,7 @@ interface CardProps {
   children: ReactNode;
 }
 
-export function Card(props: CardProps) {
+export function Root(props: CardProps) {
   const theme = useContext(themeContext);
   let cardStyle, titleStyle, auroraStyle;
 
@@ -39,10 +39,14 @@ export function Card(props: CardProps) {
         <Icon icon={PiGearFill} />
         Settings
       </span>
-      <span className={twMerge("font-poppins text-sm text-nowrap", auroraStyle)}>
+      <span
+        className={twMerge("font-poppins text-sm text-nowrap", auroraStyle)}
+      >
         Aurora v4
       </span>
-      <div className="w-full h-full flex gap-2 justify-end">{props.children}</div>
+      <div className="w-full h-full flex gap-2 justify-end">
+        {props.children}
+      </div>
     </div>
   );
 }

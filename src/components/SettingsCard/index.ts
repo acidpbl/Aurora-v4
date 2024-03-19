@@ -1,9 +1,9 @@
 import { Toggle } from "./Toggle";
-import { Card } from "./Card";
+import { Root } from "./Root";
 import { DropdownMenu } from "./Dropdown";
 
-export const SettingsCard = {
-  Root: Card,
+export const Settings = {
+  Root: Root,
   Toggle: Toggle,
   Dropdown: DropdownMenu,
 };
