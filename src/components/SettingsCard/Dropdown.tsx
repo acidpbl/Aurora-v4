@@ -44,13 +44,13 @@ export function DropdownMenu({
   if (theme === "light") {
     btnStyle =
       "bg-violet-300 text-violet-200 hover: bg-violet-400 hover:text-violet-100";
-    dropStyle = "bg-violet-300";
+    dropStyle = "bg-violet-300 border-violet-100";
     itemStyle = "bg-violet-300 hover:bg-violet-500";
   }
   if (theme === "dark") {
     btnStyle =
       "bg-neutral-800 text-violet-600 hover: bg-neutral-900 hover:text-violet-900";
-    dropStyle = "bg-neutral-800";
+    dropStyle = "bg-neutral-800 border-violet-800";
     itemStyle = "bg-neutral-800 hover:bg-violet-500";
   }
 
@@ -70,7 +70,7 @@ export function DropdownMenu({
       {isOpen && (
         <ul
           className={twMerge(
-            "absolute flex flex-col mt-6 rounded -ml-2",
+            "absolute flex flex-col mt-6 mr-6 rounded border ",
             dropStyle
           )}
         >

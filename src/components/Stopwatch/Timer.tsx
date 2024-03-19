@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import themeContext from "../../ThemeContext";
 import { twMerge } from "tailwind-merge";
+import { useStopwatch } from "./useStopwatch";
 
-export function Timer() {
+interface TimerProps {
+  time: number;
+}
+
+export function Timer(props: TimerProps) {
   const theme = useContext(themeContext);
 
   let themeStyle;
@@ -12,6 +17,9 @@ export function Timer() {
   if (theme == "dark")
     themeStyle =
       "text-violet-200 bg-neutral-700 hover:bg-violet-700 hover:text-violet-950";
+
+  const hook = useStopwatch();
+
   return (
     <span
       className={twMerge(
@@ -19,7 +27,7 @@ export function Timer() {
         themeStyle
       )}
     >
-      {"00:00:00"}
+      {hook.actions.formatTime(props.time)}
     </span>
   );
 }

@@ -14,16 +14,12 @@ import { Clock } from "./components/Clock";
 import { Stopwatch } from "./components/Stopwatch";
 import { SettingsCard } from "./components/SettingsCard";
 import themeContext from "./ThemeContext";
-import { useContext, useState } from "react";
-import { useStopwatch } from "./components/Stopwatch/useStopwatch";
+import { useContext, useEffect, useState } from "react";
 import { Divider } from "./components/Divider";
 import { BR, ES, US } from "country-flag-icons/react/1x1";
-
+import { useStopwatch } from "./components/Stopwatch/useStopwatch";
 function App() {
   const themeCtx = useContext(themeContext);
-
-  const stopwatch = useStopwatch();
-
   const [theme, setTheme] = useState(themeCtx);
 
   if (theme === "light") document.body.classList.add("light");
@@ -37,6 +33,17 @@ function App() {
         document.body.classList.replace("dark", "light");
     }
   }
+
+  const useStopW = useStopwatch();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (useStopW.states.isRunning) {
+        useStopW.actions.setTime((prev) => prev + 1);
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [useStopW.states.isRunning]);
 
   return (
     <themeContext.Provider value={theme}>
@@ -73,30 +80,40 @@ function App() {
               </div>
             </div>
           </Card.Root>
-          <Card.Root variant="sm" title="timer">
+          <Card.Root variant="sm" title="stopwatch">
             <div className="w-full h-full flex flex-col gap-4">
-              <Stopwatch.Timer />
+              <Stopwatch.Timer time={useStopW.states.time} />
               <Divider direction="h" />
-              <Stopwatch.Watched />
+              <Stopwatch.Watched savedTime={useStopW.states.savedTime} />
               <div className="flex justify-between">
                 <Stopwatch.Action.Toggle
-                  toggled={false}
+                  toggled={useStopW.states.isRunning ? true : false}
                   icon={{ toggle: PiPlayFill, toggled: PiPauseFill }}
                   variant="primary"
-                  onClick={() => stopwatch.actions.handleStopwatch()}
+                  onClick={useStopW.actions.handleRun}
                 />
-                <Stopwatch.Action.Icon icon={PiStopFill} variant="danger" />
-                <Stopwatch.Action.Icon icon={PiCopyFill} variant="secondary" />
+                <Stopwatch.Action.Icon
+                  icon={PiStopFill}
+                  variant="danger"
+                  onClick={useStopW.actions.handleStop}
+                />
+                <Stopwatch.Action.Icon
+                  icon={PiCopyFill}
+                  variant="secondary"
+                  onClick={useStopW.actions.copyCurrentTime}
+                />
                 <Stopwatch.Action.Icon
                   icon={PiFloppyDiskFill}
                   variant="success"
+                  onClick={useStopW.actions.saveTime}
                 />
-                <Stopwatch.Action.Icon icon={PiBroomFill} variant="danger" />
+                <Stopwatch.Action.Icon
+                  icon={PiBroomFill}
+                  variant="danger"
+                  onClick={useStopW.actions.clearSavedTime}
+                />
               </div>
             </div>
-          </Card.Root>
-          <Card.Root variant="lg">
-            <></>
           </Card.Root>
         </div>
       </div>

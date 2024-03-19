@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import themeContext from "../../ThemeContext";
 import { twMerge } from "tailwind-merge";
+import React from "react";
 
-export function Watched() {
+interface WatchedProps {
+  savedTime: string[];
+}
+
+export function Watched(props: WatchedProps) {
   const theme = useContext(themeContext);
   let themeStyle, savedStyle;
 
@@ -21,18 +26,18 @@ export function Watched() {
         themeStyle
       )}
     >
-      {/* {savedStopwatch.length <= 0 ? (
-                <span className="text-xs text-violet-600">not saved yet.</span>
-                ) : (
-                  savedStopwatch.map((s, index) => {
-                    return (
-                      <span className="text-xs text-violet-600">
-                      {index + 1}° - {s}
-                      </span>
-                      );
-                    })
-                  )} */}
-      <span className={twMerge("text-xs", savedStyle)}>not saved yet.</span>
+      <span className={twMerge("text-sm", savedStyle)}>
+        {props.savedTime.length > 0
+          ? props.savedTime.map((s, index) => {
+              return (
+                <React.Fragment key={index}>
+                  {`${index + 1}° - ${s}`}
+                  <br />
+                </React.Fragment>
+              );
+            })
+          : "not saved yet."}
+      </span>
     </div>
   );
 }
