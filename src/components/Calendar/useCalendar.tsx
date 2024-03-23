@@ -24,6 +24,7 @@ export function useCalendar() {
       handlePrevMonth,
       setDateDisplay,
       setDays,
+      setNav,
     },
   };
 }

@@ -3,7 +3,11 @@ import { Calendar } from ".";
 import { Card } from "../Card";
 import { useCalendar } from "./useCalendar";
 import { twMerge } from "tailwind-merge";
-import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
+import {
+  PiCaretLeftBold,
+  PiCaretRightBold,
+  PiCircleBold,
+} from "react-icons/pi";
 import ThemeContext from "../../ThemeContext";
 
 export function CalendarCard() {
@@ -135,6 +139,10 @@ export function CalendarCard() {
             <Calendar.Button
               icon={PiCaretLeftBold}
               onClick={hook.actions.handlePrevMonth}
+            />
+            <Calendar.Button
+              icon={PiCircleBold}
+              onClick={() => hook.actions.setNav(0)}
             />
             <Calendar.Button
               icon={PiCaretRightBold}
