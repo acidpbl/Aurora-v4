@@ -6,6 +6,8 @@ import { ClockCard } from "./components/Clock/ClockCard";
 import { StopwatchCard } from "./components/Stopwatch/StopwatchCard";
 import { useTheme } from "./useTheme";
 import { CalendarCard } from "./components/Calendar/CalendarCard";
+import { TimerCard } from "./components/Timer/TimerCard";
+import { WeatherCard } from "./components/Weather/WeatherCard";
 function App() {
   const themeHook = useTheme();
 
@@ -35,7 +37,9 @@ function App() {
           </Settings.Root>
           <CalendarCard />
           <ClockCard />
+          <WeatherCard />
           <StopwatchCard />
+          <TimerCard />
         </div>
       </div>
     </ThemeContext.Provider>
