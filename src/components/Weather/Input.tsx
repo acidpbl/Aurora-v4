@@ -18,13 +18,13 @@ export function Input(props: InputProps) {
 
   if (theme == "light") {
     inputStyle =
-      "bg-violet-300 hover:bg-violet-400 ease-linear transition-all placeholder:text-violet-500";
+      "bg-violet-300 hover:bg-violet-400 ease-linear transition-all placeholder:text-violet-500 text-neutral-900";
     btnStyle =
       "bg-violet-500 hover:bg-violet-600 ease-linear transition-all text-violet-200 hover:text-violet-300";
   }
   if (theme == "dark") {
     inputStyle =
-      "bg-neutral-700 hover:bg-neutral-800 ease-linear transition-all placeholder:text-violet-300";
+      "bg-neutral-700 hover:bg-neutral-800 ease-linear transition-all placeholder:text-violet-300 text-violet-200";
     btnStyle =
       "bg-violet-600 hover:bg-violet-700 ease-linear transition-all text-violet-200 hover:text-violet-300";
   }

@@ -4,6 +4,7 @@ import { useWeather } from "./useWeather";
 import { twMerge } from "tailwind-merge";
 import { useContext } from "react";
 import ThemeContext from "../../ThemeContext";
+import { ellipsis } from "../../functions/String";
 
 export function WeatherCard() {
   const weatherHook = useWeather();
@@ -41,7 +42,7 @@ export function WeatherCard() {
         {weatherHook.states.data ? (
           <>
             <div className="w-full flex h-28 justify-around">
-              <Card.MiniCard title={weatherHook.states.data.name}>
+              <Card.MiniCard title={ellipsis(weatherHook.states.data.name, 10)}>
                 <Weather.Icon icon={weatherHook.states.data.icon} />
               </Card.MiniCard>
               <Card.MiniCard title="Temperature">

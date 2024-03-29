@@ -14,10 +14,12 @@ export function FeelsLike(props: FeelsLikeProps) {
 
   switch (themeCtx) {
     case "light":
-      tempStyle = "text-neutral-900 font-semibold";
+      tempStyle =
+        "text-neutral-900 font-semibold group-hover/minicard:text-violet-600";
       break;
     case "dark":
-      tempStyle = "text-violet-200";
+      tempStyle =
+        "text-violet-200 group-hover/minicard:text-neutral-900 group-hover/minicard:font-semibold";
       break;
     default:
       break;
@@ -25,7 +27,12 @@ export function FeelsLike(props: FeelsLikeProps) {
 
   return (
     <div className="flex flex-col size-full items-center py-6 gap-4">
-      <span className={twMerge("flex text-lg items-center gap-2", tempStyle!)}>
+      <span
+        className={twMerge(
+          "flex text-lg items-center gap-2 ease-linear transition-all",
+          tempStyle!
+        )}
+      >
         <PiSmileyBold />
         {props.feels.toString().substring(0, 2)}° C
       </span>
