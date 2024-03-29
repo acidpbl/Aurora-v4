@@ -26,7 +26,7 @@ export function StopwatchCard() {
 
   return (
     <Card.Root variant="sm" title="stopwatch">
-      <div className="w-full h-full flex flex-col gap-4">
+      <div className="size-full flex flex-col gap-4">
         <Stopwatch.Timer time={hook.states.time} />
         <Divider direction="h" />
         <Stopwatch.Watched savedTime={hook.states.savedTime} />

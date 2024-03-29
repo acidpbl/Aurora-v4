@@ -58,7 +58,7 @@ function Icon({ icon: Icon, ...props }: IconProps) {
   return (
     <button
       className={twMerge(
-        "action-btn h-10 w-10 flex items-center justify-center rounded transition-all ease-linear",
+        "action-btn size-10 flex items-center justify-center rounded transition-all ease-linear",
         variant
       )}
       disabled={variant == "disabled" ? true : false}
@@ -109,7 +109,7 @@ function Toggle({ icon: Icon, toggled = false, ...props }: ToggleProps) {
   return (
     <button
       className={twMerge(
-        "action-btn h-10 w-10 flex items-center justify-center rounded transition-all ease-linear",
+        "action-btn size-10 flex items-center justify-center rounded transition-all ease-linear",
         variant
       )}
       {...props}

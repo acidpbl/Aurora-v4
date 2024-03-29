@@ -26,7 +26,7 @@ export function TimerCard() {
 
   return (
     <Card.Root variant="sm" title="Timer">
-      <div className="w-full h-full flex flex-col gap-4">
+      <div className="size-full flex flex-col gap-4">
         <Timer.Timer time={hook.states.time} />
         <Divider direction="h" />
         <Timer.Watched savedTime={hook.states.savedTime} />
