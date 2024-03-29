@@ -18,7 +18,7 @@ export function TimerCard() {
   useEffect(() => {
     const timer = setInterval(() => {
       if (hook.states.isRunning) {
-        hook.actions.setTime((prev) => prev + 1);
+        hook.actions.setTime((prev) => (prev > 0 ? prev - 1 : prev));
       }
     }, 1000);
     return () => clearInterval(timer);
@@ -27,7 +27,12 @@ export function TimerCard() {
   return (
     <Card.Root variant="sm" title="Timer">
       <div className="size-full flex flex-col gap-4">
-        <Timer.Timer time={hook.states.time} />
+        <Timer.Timer
+          time={hook.states.time}
+          stopTimer={hook.actions.handlePause}
+          changeTimer={hook.actions.handleTimerChange}
+          pauseTimer={hook.actions.handlePause}
+        />
         <Divider direction="h" />
         <Timer.Watched savedTime={hook.states.savedTime} />
         <div className="flex justify-between">

@@ -5,23 +5,28 @@ import { useTimer } from "./useTimer";
 
 interface ClockProps {
   time: number;
+  stopTimer: () => void;
+  changeTimer: (newTimer: number) => void;
+  pauseTimer: () => void;
 }
 
 export function Clock(props: ClockProps) {
+  const hook = useTimer();
+
   const [isEditing, setIsEditing] = useState(false);
   function handleBlur() {
     setIsEditing(false);
+    props.stopTimer();
   }
 
   function handleClick() {
     setIsEditing(true);
-  }
-
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    hook.actions.setTime(Number(event.target.value));
+    props.stopTimer();
   }
 
   const theme = useContext(themeContext);
+
+  if (props.time == 0) props.pauseTimer();
 
   let themeStyle;
 
@@ -31,8 +36,6 @@ export function Clock(props: ClockProps) {
     themeStyle =
       "text-violet-200 bg-neutral-700 hover:bg-violet-700 hover:text-violet-950";
 
-  const hook = useTimer();
-
   return isEditing ? (
     <input
       className={twMerge(
@@ -40,10 +43,17 @@ export function Clock(props: ClockProps) {
         themeStyle
       )}
       type="number"
-      onChange={handleChange}
+      onChange={(e) => {
+        props.changeTimer(Number(e.target.value));
+      }}
       onBlur={handleBlur}
       placeholder="00:00:00"
       autoFocus
+      value={props.time}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+        }
+      }}
     />
   ) : (
     <span

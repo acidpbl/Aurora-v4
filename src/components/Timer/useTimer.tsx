@@ -2,18 +2,26 @@ import { useState } from "react";
 
 export function useTimer() {
   const [isRunning, setIsRunning] = useState(false);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(Number(""));
   const [toggle, setToggle] = useState(false);
 
   const [savedTime, setSavedTime] = useState<string[]>([]);
+
+  function handleTimerChange(newTimer: number) {
+    setTime(newTimer);
+  }
 
   function handleRun() {
     setIsRunning((prev) => !prev);
   }
 
+  function handlePause() {
+    setIsRunning(false);
+  }
+
   function handleStop() {
     setIsRunning(false);
-    setTime(0);
+    setTime(60);
   }
 
   function handleClock() {
@@ -55,6 +63,8 @@ export function useTimer() {
       clearSavedTime,
       saveTime,
       copyCurrentTime,
+      handleTimerChange,
+      handlePause,
     },
     states: { time, isRunning, toggle, savedTime },
   };
