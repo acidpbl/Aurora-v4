@@ -178,7 +178,7 @@ export function PomodoroCard() {
           title="Chill"
           status={
             chillActive
-              ? `${100 - Math.floor(pomodoroProgress)}/100%`
+              ? `${100 - Math.floor(chillProgress)}/100%`
               : "Waiting start"
           }
           minutes={chillMinutes}

@@ -1,8 +1,6 @@
 import { ReactNode, useContext } from "react";
 import { twMerge } from "tailwind-merge";
 import themeContext from "../../ThemeContext";
-import { Icon } from "./Icon";
-import { PiGearFill } from "react-icons/pi";
 
 interface CardProps {
   children: ReactNode;
@@ -36,7 +34,6 @@ export function Root(props: CardProps) {
           "w-full font-poppins font-medium text-sm cursor-default select-none flex items-center gap-2"
         )}
       >
-        <Icon icon={PiGearFill} />
         Settings
       </span>
       <span

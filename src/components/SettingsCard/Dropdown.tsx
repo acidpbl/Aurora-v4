@@ -69,10 +69,7 @@ export function DropdownMenu({
       </button>
       {isOpen && (
         <ul
-          className={twMerge(
-            "absolute flex flex-col mt-6 mr-6 rounded border ",
-            dropStyle
-          )}
+          className={twMerge("absolute flex mt-6 -mr-1.5 rounded border ", dropStyle)}
         >
           {options.map((option, index) => (
             <li
@@ -80,7 +77,7 @@ export function DropdownMenu({
               onClick={() => handleSelectOption(option)}
               className={twMerge("p-1 rounded", itemStyle)}
             >
-              {<option.icon className="w-8 rounded" />}
+              {<option.icon className="w-6 rounded" />}
             </li>
           ))}
         </ul>
