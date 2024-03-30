@@ -151,7 +151,7 @@ export function CalendarCard() {
           </div>
         </div>
         <div className="w-full flex flex-col gap-2">
-          <Calendar.Weekdays />
+          <Calendar.Weekdays nav={hook.states.nav} />
           <Calendar.Days days={hook.states.days} />
         </div>
       </div>

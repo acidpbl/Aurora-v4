@@ -40,7 +40,7 @@ export function Input(props: InputProps) {
       <input
         type="string"
         name=""
-        id=""
+        id="weatherInput"
         value={props.city}
         className={twMerge(
           "w-full p-2 h-8 rounded-l outline-none",

@@ -1,11 +1,13 @@
 import { twMerge } from "tailwind-merge";
-import { useCalendar } from "./useCalendar";
 import { useContext } from "react";
 import ThemeContext from "../../ThemeContext";
 
-export function Weekdays() {
+interface WeekdaysProps {
+  nav: number;
+}
+
+export function Weekdays(props: WeekdaysProps) {
   const theme = useContext(ThemeContext);
-  const hook = useCalendar();
 
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const today = new Date().toLocaleDateString("en-us", {
@@ -35,9 +37,7 @@ export function Weekdays() {
           <span
             className={twMerge(
               "w-full text-center ease-linear transition-all",
-              today === weekday && hook.states.nav === 0
-                ? currentStyle
-                : navStyle
+              props.nav === 0 && today === weekday ? currentStyle : navStyle
             )}
             key={index}
           >

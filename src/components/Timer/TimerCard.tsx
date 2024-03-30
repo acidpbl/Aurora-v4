@@ -32,6 +32,7 @@ export function TimerCard() {
           stopTimer={hook.actions.handlePause}
           changeTimer={hook.actions.handleTimerChange}
           pauseTimer={hook.actions.handlePause}
+          resetTimer={() => hook.actions.setTime(0)}
         />
         <Divider direction="h" />
         <Timer.Watched savedTime={hook.states.savedTime} />

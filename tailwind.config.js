@@ -5,6 +5,10 @@ export default {
     extend: {
       fontFamily: {
         poppins: "poppins, sans-serif",
+        monospace: "Fira Mono, sans-serif",
+      },
+      height: {
+        34: "8.5rem",
       },
     },
   },

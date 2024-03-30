@@ -18,11 +18,13 @@ export function WeatherCard() {
       break;
     case "dark":
       boxStyle =
-        "bg-neutral-600 text-violet-200 hover:bg-violet-600 hover:text-violet-950 ease-linear transition-all";
+        "bg-neutral-700 text-violet-200 hover:bg-violet-600 hover:text-violet-950 ease-linear transition-all";
       break;
     default:
       break;
   }
+
+  const input = document.getElementById("weatherInput");
 
   return (
     <Card.Root
@@ -69,7 +71,9 @@ export function WeatherCard() {
               "w-[calc(_100%_-_8rem)] mt-8 p-12 aspect-square flex items-center justify-center text-5xl rounded",
               boxStyle!
             )}
-            onClick={() => console.log(weatherHook.states.city)}
+            onClick={() => {
+              input?.focus();
+            }}
           >
             ?
           </span>

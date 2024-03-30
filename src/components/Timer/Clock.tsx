@@ -8,6 +8,7 @@ interface ClockProps {
   stopTimer: () => void;
   changeTimer: (newTimer: number) => void;
   pauseTimer: () => void;
+  resetTimer: () => void;
 }
 
 export function Clock(props: ClockProps) {
@@ -44,14 +45,18 @@ export function Clock(props: ClockProps) {
       )}
       type="number"
       onChange={(e) => {
-        props.changeTimer(Number(e.target.value));
+        if (Number(e.target.value) > 359999) return;
+        else props.changeTimer(Number(e.target.value));
       }}
       onBlur={handleBlur}
       placeholder="00:00:00"
       autoFocus
       value={props.time}
       onKeyDown={(e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter") handleBlur();
+        if (e.key === "Escape") {
+          setIsEditing(false);
+          props.resetTimer();
         }
       }}
     />
