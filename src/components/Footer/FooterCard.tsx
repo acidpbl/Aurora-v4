@@ -58,12 +58,12 @@ export function FooterCard({ title = "Footer" }: FooterCardProps) {
         <Footer.LinkButton
           icon={PiMoonFill}
           title="Pablo"
-          href="https://pabloalbrnz.github.io/portfolio"
+          href="https://pblalbrnz.github.io/portfolio"
         />
         <Footer.LinkButton
           icon={PiGithubLogoFill}
           title="github"
-          href="https://github.com/pabloalbrnz"
+          href="https://github.com/pblalbrnz"
         />
         <Footer.LinkButton
           icon={PiLinkedinLogoFill}
