@@ -9,55 +9,67 @@ interface CardRootProps {
   title?: string;
 }
 
+type ThemeStyles = {
+  card: string;
+  title: string;
+  content: string;
+};
+
 export function CardRoot({ title = "title", ...props }: CardRootProps) {
   const theme = useContext(themeContext);
-  let variant, cardStyle, titleStyle;
+  let variant;
 
-  if (theme == "light") {
-    cardStyle = "bg-violet-200";
-    titleStyle = "text-neutral-900 hover:text-violet-800";
-  }
-  if (theme == "dark") {
-    cardStyle = "bg-neutral-950";
-    titleStyle = "text-violet-600 hover:text-violet-500";
-  }
+  const styles: ThemeStyles = {
+    card: "bg-neutral-200",
+    title: "text-neutral-500",
+    content: "w-full",
+    ...(theme === "light" && {
+      card: "bg-violet-200",
+      title: "text-neutral-800",
+    }),
+    ...(theme === "dark" && {
+      card: "bg-neutral-800",
+      title: "text-neutral-200",
+    }),
+    ...(props.variant === "sm" && {
+      content: "aspect-square",
+    }),
+  };
 
   switch (props.variant) {
     case "sm":
-      variant = "max-h-96 max-w-96 min-h-96 min-w-96";
+      variant = "col-span-1 w-full aspect-square h-full";
       break;
     case "md":
-      variant =
-        "max-h-96 max-w-[calc(4px*96*2+16px)] min-h-96 min-w-[calc(4px*96*2+16px)]";
+      variant = "col-span-2 w-full h-full";
       break;
     case "lg":
-      variant =
-        "max-h-96 max-w-[calc(4px*96*3+32px)] min-h-96 min-w-[calc(4px*96*3+32px)]";
+      variant = "col-span-3 w-full h-full";
       break;
     default:
       break;
   }
-
-  if (title.length <= 0) title = "title";
 
   return (
     <themeContext.Provider value={theme}>
       <div
         className={twMerge(
           variant,
-          cardStyle,
-          "rounded-xl flex flex-col items-center gap-4 py-4 px-12 font-poppins font-medium transition-all ease-linear"
+          styles.card,
+          "rounded-md flex flex-col items-center py-4 px-8 gap-4"
         )}
       >
         <span
           className={twMerge(
-            titleStyle,
-            "cursor-default select-none transition-all ease-linear"
+            styles.title,
+            "font-medium transition-all ease-linear"
           )}
         >
-          {capitalize(title)}
+          {title ? capitalize(title) : ""}
         </span>
-        {props.children}
+        <div className={twMerge("w-full", styles.content)}>
+          {props.children}
+        </div>
       </div>
     </themeContext.Provider>
   );

@@ -3,56 +3,65 @@ import { useContext } from "react";
 import ThemeContext from "../../ThemeContext";
 
 interface DaysProps {
-  days: [];
+  days: Array<{ value: string; class: string; isCurrentDay: boolean }>;
 }
 
-export function Days(props: DaysProps) {
+type ThemeStyles = {
+  bg: string;
+  day: string;
+  days: string;
+  current: string;
+  inactive: string;
+};
+
+export function Days({ days }: DaysProps) {
   const theme = useContext(ThemeContext);
 
-  let daysStyle: string,
-    inactiveStyle: string,
-    currentStyle: string,
-    bgStyle: string;
-
-  switch (theme) {
-    case "light":
-      bgStyle = "bg-violet-300 border-violet-500";
-      daysStyle = "bg-violet-300 text-neutral-800";
-      currentStyle = "bg-violet-500 text-violet-200 rounded";
-      inactiveStyle = "bg-neutral-200 text-neutral-400";
-      break;
-    case "dark":
-      bgStyle = "bg-neutral-700 border-violet-600";
-      daysStyle = "bg-neutral-700 text-violet-200 font-light";
-      currentStyle = "bg-violet-600 text-neutral-800 rounded font-semibold";
-      inactiveStyle = "bg-neutral-500 text-neutral-600";
-      break;
-
-    default:
-      break;
-  }
+  const styles: ThemeStyles = {
+    bg: "bg-neutral-500",
+    day: "hover:bg-neutral-600 hover:text-neutral-800",
+    days: "bg-neutral-500 text-neutral-600",
+    current: "bg-neutral-600 text-neutral-800 rounded",
+    inactive:
+      "bg-neutral-300 text-neutral-400 hover:text-neutral-500 hover:bg-neutral-400",
+    ...(theme === "light" && {
+      bg: "bg-violet-300",
+      day: "hover:bg-violet-600 hover:text-violet-200",
+      days: "bg-violet-300 text-neutral-800",
+      current: "bg-violet-500 text-violet-200 rounded",
+      inactive:
+        "bg-purple-100 text-slate-400 hover:text-neutral-500 hover:bg-neutral-400",
+    }),
+    ...(theme === "dark" && {
+      bg: "bg-neutral-700",
+      day: "hover:bg-violet-500 hover:text-violet-200",
+      days: "bg-neutral-700 text-violet-200 font-light",
+      current: "bg-violet-600 text-neutral-800 font-semibold rounded",
+      inactive:
+        "bg-neutral-500 text-neutral-600 hover:text-neutral-600 hover:bg-neutral-700",
+    }),
+  };
 
   return (
     <div
       className={twMerge(
-        "w-full grid grid-cols-7 rounded overflow-clip ease-linear transition-all border",
-        bgStyle!
+        "grid grid-cols-7 overflow-hidden transition-all",
+        styles.bg
       )}
     >
-      {props.days.map((d: any, index: any) => {
-        return (
-          <button
-            key={index}
-            className={twMerge(
-              "text-center p-1.5 cursor-pointer ease-linear transition-all hover:bg-violet-600 hover:text-violet-800 hover:font-semibold hover:rounded",
-              d.class === "inactive" ? inactiveStyle : daysStyle,
-              d.isCurrentDay && currentStyle
-            )}
-          >
-            {d.value}
-          </button>
-        );
-      })}
+      {days.map((d, index) => (
+        <button
+          key={index}
+          className={twMerge(
+            "text-center p-2 cursor-pointer transition-all ease-linear hover:rounded",
+            styles.day,
+            d.class === "inactive" ? styles.inactive : styles.days,
+            d.isCurrentDay && styles.current
+          )}
+        >
+          {d.value}
+        </button>
+      ))}
     </div>
   );
 }

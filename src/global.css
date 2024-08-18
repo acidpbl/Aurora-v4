@@ -18,7 +18,7 @@ body: {
 }
 
 body.dark {
-  background-color: theme(colors.neutral.800);
+  background-color: theme(colors.neutral.950);
 }
 
 body.light {

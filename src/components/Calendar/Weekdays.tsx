@@ -6,6 +6,11 @@ interface WeekdaysProps {
   nav: number;
 }
 
+type ThemeStyles = {
+  nav: string;
+  current: string;
+};
+
 export function Weekdays(props: WeekdaysProps) {
   const theme = useContext(ThemeContext);
 
@@ -14,30 +19,27 @@ export function Weekdays(props: WeekdaysProps) {
     weekday: "short",
   });
 
-  let navStyle: string, currentStyle: string;
-
-  switch (theme) {
-    case "light":
-      navStyle = "text-neutral-800";
-      currentStyle = "font-semibold text-violet-500";
-      break;
-    case "dark":
-      navStyle = "text-violet-200";
-      currentStyle = "font-semibold text-violet-600";
-      break;
-
-    default:
-      break;
-  }
+  const styles: ThemeStyles = {
+    nav: "text-neutral-800 bg-neutral-600",
+    current: "text-neutral-500 bg-neutral-700",
+    ...(theme == "light" && {
+      nav: "text-neutral-800 bg-violet-100",
+      current: "text-violet-500 bg-violet-100",
+    }),
+    ...(theme == "dark" && {
+      nav: "text-neutral-200 bg-neutral-900",
+      current: "text-violet-400 bg-neutral-900",
+    }),
+  };
 
   return (
-    <div className={twMerge("w-full flex justify-between text-sm")}>
+    <div className={twMerge("flex justify-between text-sm")}>
       {weekdays.map((weekday: string, index: any) => {
         return (
           <span
             className={twMerge(
-              "w-full text-center ease-linear transition-all",
-              props.nav === 0 && today === weekday ? currentStyle : navStyle
+              "size-full p-2 text-center ease-linear transition-all font-semibold",
+              props.nav === 0 && today === weekday ? styles.current : styles.nav
             )}
             key={index}
           >

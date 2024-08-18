@@ -16,25 +16,24 @@ import notPomodoro from "../../audios/notification_pomodoro.mp3";
 import notChill from "../../audios/notification_chill.mp3";
 import { play } from "../../functions/Audios";
 
+type ThemeStyles = {
+  focused: string;
+};
+
 export function PomodoroCard() {
   const themeCtx = useContext(ThemeContext);
 
-  let focusedStyle: string;
-
-  switch (themeCtx) {
-    case "light":
-      focusedStyle =
-        "bg-violet-300 hover:bg-violet-400 text-neutral-800 hover:text-violet-800";
-
-      break;
-    case "dark":
-      focusedStyle =
-        "bg-neutral-700 hover:bg-violet-700 text-violet-200 hover:text-violet-950";
-
-      break;
-    default:
-      break;
-  }
+  const styles: ThemeStyles = {
+    focused: "",
+    ...(themeCtx == "light" && {
+      focused:
+        "bg-violet-300 hover:bg-violet-400 text-neutral-800 hover:text-violet-800",
+    }),
+    ...(themeCtx == "dark" && {
+      focused:
+        "bg-neutral-700 hover:bg-violet-700 text-violet-200 hover:text-violet-950",
+    }),
+  };
 
   const [pomodoroTime, setPomodoroTime] = useState(25 * 60);
   const [pomodoroProgress, setPomodoroProgress] = useState(0);
@@ -110,8 +109,8 @@ export function PomodoroCard() {
           minutes={pomodoroMinutes}
           seconds={pomodoroSeconds}
         />
-        <div className="size-full flex flex-col justify-between px-28 gap-8">
-          <div className="w-full h-34 flex flex-wrap justify-between items-center">
+        <div className="size-full flex flex-col px-32 gap-12">
+          <div className="w-full flex flex-wrap justify-around gap-y-4 gap-x-2">
             <Card.ToggleButton
               toggled={pomodoroActive ? true : false}
               icon={{ toggle: PiPlayFill, toggled: PiPauseFill }}
@@ -162,8 +161,8 @@ export function PomodoroCard() {
           </div>
           <div
             className={twMerge(
-              "size-full rounded-md text-center py-4 flex flex-col ease-linear transition-all",
-              focusedStyle!
+              "size-full rounded-md text-center justify-center py-4 flex flex-col ease-linear transition-all",
+              styles.focused
             )}
           >
             <span className="text-4xl font-semibold ease-linear transition-all">

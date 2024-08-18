@@ -16,6 +16,12 @@ interface DropdownMenuProps {
   onSelect?: (selectedOption: DropdownOptionProps) => void;
 }
 
+type ThemeStyles = {
+  btn: string;
+  drop: string;
+  item: string;
+};
+
 export function DropdownMenu({
   icon: Icon,
   options,
@@ -39,26 +45,30 @@ export function DropdownMenu({
 
   const theme = useContext(themeContext);
 
-  let btnStyle, dropStyle, itemStyle: string;
-
-  if (theme === "light") {
-    btnStyle =
-      "bg-violet-300 text-violet-200 hover: bg-violet-400 hover:text-violet-100";
-    dropStyle = "bg-violet-300 border-violet-100";
-    itemStyle = "bg-violet-300 hover:bg-violet-500";
-  }
-  if (theme === "dark") {
-    btnStyle =
-      "bg-neutral-800 text-violet-600 hover: bg-neutral-900 hover:text-violet-900";
-    dropStyle = "bg-neutral-800 border-violet-800";
-    itemStyle = "bg-neutral-800 hover:bg-violet-500";
-  }
+  const styles: ThemeStyles = {
+    btn: "bg-neutral-300 text-neutral-200 hover:bg-neutral-400 hover:text-neutral-100",
+    drop: "bg-neutral-300 border-neutral-100",
+    item: "text-neutral-700",
+    ...(theme === "light" && {
+      btn: "bg-violet-400 text-neutral-200 hover:bg-violet-600 hover:text-violet-300",
+      drop: "bg-violet-400 border-violet-600",
+      item: "hover:bg-violet-500",
+    }),
+    ...(theme === "dark" && {
+      btn: "bg-neutral-600 text-neutral-100 hover:bg-neutral-700 hover:text-neutral-400",
+      drop: "bg-neutral-600 border-neutral-400",
+      item: "hover:bg-neutral-800",
+    }),
+  };
 
   return (
     <>
       <button
         onClick={handleToggle}
-        className={twMerge(btnStyle, "p-1 rounded transition-all ease-linear")}
+        className={twMerge(
+          styles.btn,
+          "p-2 rounded transition-all ease-linear"
+        )}
         {...props}
       >
         {selectedOption?.icon ? (
@@ -69,13 +79,19 @@ export function DropdownMenu({
       </button>
       {isOpen && (
         <ul
-          className={twMerge("absolute flex mt-6 -mr-1.5 rounded border ", dropStyle)}
+          className={twMerge(
+            "absolute flex mt-9 -mr-1.5 rounded border ",
+            styles.drop
+          )}
         >
           {options.map((option, index) => (
             <li
               key={index}
               onClick={() => handleSelectOption(option)}
-              className={twMerge("p-1 rounded", itemStyle)}
+              className={twMerge(
+                "p-2 rounded ease-linear transition-colors cursor-pointer",
+                styles.item
+              )}
             >
               {<option.icon className="w-6 rounded" />}
             </li>

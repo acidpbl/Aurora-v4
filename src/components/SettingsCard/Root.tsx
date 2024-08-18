@@ -6,44 +6,47 @@ interface CardProps {
   children: ReactNode;
 }
 
+type ThemeStyles = {
+  card: string;
+  title: string;
+  aurora: string;
+};
+
 export function Root(props: CardProps) {
   const theme = useContext(themeContext);
-  let cardStyle, titleStyle, auroraStyle;
 
-  if (theme == "light") {
-    cardStyle = "bg-violet-200";
-    titleStyle = "text-neutral-900 hover:text-violet-800";
-    auroraStyle = "font-semibold text-violet-800";
-  }
-  if (theme == "dark") {
-    cardStyle = "bg-neutral-950";
-    titleStyle = "text-violet-600 hover:text-violet-500";
-    auroraStyle = "font-medium text-violet-600";
-  }
+  const styles: ThemeStyles = {
+    card: "bg-neutral-200",
+    title: "text-neutral-500",
+    aurora: "text-neutral-700",
+    ...(theme === "light" && {
+      card: "bg-violet-200",
+      title: "text-neutral-800",
+      aurora: "text-violet-800",
+    }),
+    ...(theme === "dark" && {
+      card: "bg-neutral-800",
+      title: "text-neutral-200",
+      aurora: "text-violet-500",
+    }),
+  };
 
   return (
     <div
       className={twMerge(
-        "w-full min-h-12 max-h-12 p-4 rounded-lg flex items-center transition-all ease-linear",
-        cardStyle
+        "col-span-3 flex px-8 py-4 rounded-md items-center justify-between transition-all ease-linear",
+        styles.card
       )}
     >
       <span
-        className={twMerge(
-          titleStyle,
-          "w-full font-poppins font-medium text-sm cursor-default select-none flex items-center gap-2"
-        )}
+        className={twMerge(styles.title, "font-medium text-sm")}
       >
         Settings
       </span>
-      <span
-        className={twMerge("font-poppins text-sm text-nowrap", auroraStyle)}
-      >
+      <span className={twMerge("text-nowrap", styles.aurora)}>
         Aurora v4
       </span>
-      <div className="w-full h-full flex gap-2 justify-end">
-        {props.children}
-      </div>
+      <div className="flex gap-2 justify-end">{props.children}</div>
     </div>
   );
 }

@@ -35,9 +35,9 @@ export function LinkButton({ icon: Icon, ...props }: LinkButtonProps) {
         className={twMerge("p-2 rounded ease-linear transition-all", aStyle!)}
         target="_blank"
       >
-        <Icon size={32} />
+        <Icon className="sm:size-4 md:size-8" />
       </a>
-      <span className={twMerge("text-xs", titleStyle!)}>{props.title}</span>
+      <span className={twMerge("text-[0.6rem] md:text-xs", titleStyle!)}>{props.title}</span>
     </div>
   );
 }

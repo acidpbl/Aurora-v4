@@ -8,21 +8,26 @@ interface ToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   toggled: boolean;
 }
 
+type ThemeStyles = {
+  btn: string;
+};
+
 export function Toggle({ toggled = false, icon: Icon, ...props }: ToggleProps) {
   const theme = useContext(themeContext);
 
-  let btnStyle;
-
-  if (theme === "light")
-    btnStyle =
-      "bg-violet-300 text-violet-200 hover: bg-violet-400 hover:text-violet-100";
-  if (theme === "dark")
-    btnStyle =
-      "bg-neutral-800 text-violet-600 hover: bg-neutral-900 hover:text-violet-900";
+  const styles: ThemeStyles = {
+    btn: "bg-neutral-300 text-neutral-200 hover:bg-neutral-400 hover:text-neutral-100",
+    ...(theme === "light" && {
+      btn: "bg-violet-400 text-neutral-200 hover:bg-violet-600 hover:text-violet-300",
+    }),
+    ...(theme === "dark" && {
+      btn: "bg-neutral-600 text-neutral-100 hover:bg-neutral-700 hover:text-neutral-400",
+    }),
+  };
 
   return (
     <button
-      className={twMerge(btnStyle, "p-1 rounded transition-all ease-linear")}
+      className={twMerge(styles.btn, "p-2 rounded transition-all ease-linear")}
       {...props}
     >
       {toggled ? <Icon.toggled /> : <Icon.toggle />}

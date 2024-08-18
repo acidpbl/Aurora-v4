@@ -34,26 +34,26 @@ export function IconButton({
     case "secondary":
       if (theme === "light")
         btnStyle =
-          "bg-yellow-500 text-violet-100 hover:bg-yellow-600 hover:text-violet-200";
+          "bg-yellow-500 text-yellow-100 hover:bg-yellow-600 hover:text-yellow-200";
       if (theme === "dark")
         btnStyle =
-          "bg-yellow-600 text-violet-200 hover:bg-yellow-700 hover:text-violet-300";
+          "bg-yellow-600 text-yellow-200 hover:bg-yellow-700 hover:text-yellow-300";
       break;
     case "success":
       if (theme === "light")
         btnStyle =
-          "bg-green-600 text-violet-100 hover:bg-green-700 hover:text-violet-200";
+          "bg-green-600 text-green-100 hover:bg-green-700 hover:text-green-200";
       if (theme === "dark")
         btnStyle =
-          "bg-green-700 text-violet-200 hover:bg-green-800 hover:text-violet-300";
+          "bg-green-700 text-green-200 hover:bg-green-800 hover:text-green-300";
       break;
     case "danger":
       if (theme === "light")
         btnStyle =
-          "bg-red-500 text-violet-100 hover:bg-red-600 hover:text-violet-200";
+          "bg-red-500 text-red-100 hover:bg-red-600 hover:text-red-200";
       if (theme === "dark")
         btnStyle =
-          "bg-red-600 text-violet-200 hover:bg-red-700 hover:text-violet-300";
+          "bg-red-600 text-red-200 hover:bg-red-700 hover:text-red-300";
       break;
     case "disabled":
       if (theme === "light")

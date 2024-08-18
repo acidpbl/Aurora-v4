@@ -21,6 +21,10 @@ const months = [
 
 const now = new Date();
 
+type ThemeStyle = {
+  theme: string;
+};
+
 export function TodayDate({}: TodayDateProps) {
   const [date, setDate] = useState({
     today: now.getDate(),
@@ -39,17 +43,23 @@ export function TodayDate({}: TodayDateProps) {
     return () => clearInterval(timer);
   }, []);
   const theme = useContext(themeContext);
-  let themeStyle;
 
-  if (theme == "light") themeStyle = "text-violet-600";
-  if (theme == "dark") themeStyle = "text-violet-400";
+  const styles: ThemeStyle = {
+    theme: "text-neutral-600",
+    ...(theme == "light" && {
+      theme: "text-violet-500 font-medium",
+    }),
+    ...(theme == "dark" && {
+      theme: "text-neutral-200",
+    }),
+  };
 
   return (
     <div className="flex flex-col">
-      <span className={twMerge("text-2xl text-center", themeStyle)}>
+      <span className={twMerge("text-2xl text-center", styles.theme)}>
         {`${date.today} ${months[date.month]}`}
       </span>
-      <span className={twMerge("text-lg text-center", themeStyle)}>
+      <span className={twMerge("text-lg text-center", styles.theme)}>
         {`${date.year}`}
       </span>
     </div>

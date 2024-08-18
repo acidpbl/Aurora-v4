@@ -7,31 +7,32 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: IconType;
 }
 
+type ThemeStyles = {
+  btn: string;
+};
+
 export function Button({ icon: Icon, ...props }: ButtonProps) {
   const theme = useContext(ThemeContext);
 
-  let buttonStyle: string;
+  const styles: ThemeStyles = {
+    btn: "bg-neutral-500 text-neutral-200 hover:text-neutral-300",
+    ...(theme == "light" && {
+      btn: "bg-violet-500 text-violet-200 hover:text-violet-300",
+    }),
+    ...(theme == "dark" && {
+      btn: "bg-violet-600 text-neutral-800 hover:text-neutral-950",
+    }),
+  };
 
-  switch (theme) {
-    case "light":
-      buttonStyle = "bg-violet-500 text-violet-200 hover:text-violet-300";
-      break;
-    case "dark":
-      buttonStyle = "bg-violet-600 text-neutral-800 hover:text-neutral-950";
-      break;
-
-    default:
-      break;
-  }
   return (
     <button
       {...props}
       className={twMerge(
-        "p-1 aspect-square rounded ease-linear transition-all hover:bg-violet-800",
-        buttonStyle!
+        "p-2 aspect-square rounded ease-linear transition-all hover:bg-violet-800",
+        styles.btn
       )}
     >
-      <Icon className="h-3" />
+      <Icon className="h-4" />
     </button>
   );
 }

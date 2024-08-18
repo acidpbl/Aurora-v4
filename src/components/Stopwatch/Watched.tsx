@@ -7,26 +7,35 @@ interface WatchedProps {
   savedTime: string[];
 }
 
+type ThemeStyle = {
+  box: string;
+  saved: string;
+};
+
 export function Watched(props: WatchedProps) {
   const theme = useContext(themeContext);
-  let themeStyle, savedStyle;
 
-  if (theme == "light") {
-    themeStyle = "bg-violet-300";
-    savedStyle = "text-violet-600";
-  }
-  if (theme == "dark") {
-    themeStyle = "bg-neutral-700";
-    savedStyle = "text-violet-200";
-  }
+  const styles: ThemeStyle = {
+    box: "bg-neutral-300",
+    saved: "text-neutral-600",
+    ...(theme === "light" && {
+      box: "bg-violet-300",
+      saved: "text-neutral-950",
+    }),
+    ...(theme === "dark" && {
+      box: "bg-neutral-700",
+      saved: "text-violet-200",
+    }),
+  };
+
   return (
     <div
       className={twMerge(
-        "flex flex-col w-full min-h-16 max-h-16 rounded px-4 py-2 overflow-y-auto gap-1 transition-all ease-linear cursor-default",
-        themeStyle
+        "flex flex-col w-full min-h-24 max-h-24 rounded px-4 py-2 overflow-y-auto gap-1 transition-all ease-linear cursor-default",
+        styles.box
       )}
     >
-      <span className={twMerge("text-sm", savedStyle)}>
+      <span className={twMerge("text-sm", styles.saved)}>
         {props.savedTime.length > 0
           ? props.savedTime.map((s, index) => {
               return (

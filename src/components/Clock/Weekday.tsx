@@ -6,12 +6,22 @@ interface WeekdayProps {}
 
 const now = new Date();
 
+type ThemeStyle = {
+  theme: string;
+};
+
 export function Weekday({}: WeekdayProps) {
   const theme = useContext(themeContext);
-  let themeStyle;
 
-  if (theme == "light") themeStyle = "text-violet-800 font-semibold";
-  if (theme == "dark") themeStyle = "text-violet-600";
+  const styles: ThemeStyle = {
+    theme: "text-neutral-600",
+    ...(theme == "light" && {
+      theme: "text-violet-800 font-semibold",
+    }),
+    ...(theme == "dark" && {
+      theme: "text-neutral-300",
+    }),
+  };
 
   const [date, setDate] = useState({
     weekday: now.toLocaleDateString("en", { weekday: "long" }),
@@ -26,5 +36,7 @@ export function Weekday({}: WeekdayProps) {
     return () => clearInterval(timer);
   }, []);
 
-  return <span className={twMerge("text-lg", themeStyle)}>{date.weekday}</span>;
+  return (
+    <span className={twMerge("text-lg", styles.theme)}>{date.weekday}</span>
+  );
 }

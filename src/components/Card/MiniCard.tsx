@@ -8,31 +8,39 @@ interface MiniCardProps {
   title?: string;
 }
 
+type ThemeStyle = {
+  card: string;
+  title: string;
+};
+
 export function MiniCard({ title = "title", ...props }: MiniCardProps) {
   const theme = useContext(ThemeContext);
-  let cardStyle: string, titleStyle: string;
 
-  if (theme == "light") {
-    cardStyle = "bg-violet-300 hover:bg-violet-400 ease-linear transition-all";
-    titleStyle = "text-neutral-900 font-semibold group-hover/minicard:text-violet-800";
-  }
-  if (theme == "dark") {
-    cardStyle = "bg-neutral-700 hover:bg-violet-600 ease-linear transition-all";
-    titleStyle = "text-violet-600 group-hover/minicard:text-violet-200";
-  }
+  const styles: ThemeStyle = {
+    card: "",
+    title: "",
+    ...(theme === "light" && {
+      card: "bg-violet-300 hover:bg-violet-400 ease-linear transition-all",
+      title: "text-violet-600 group-hover/minicard:text-violet-200",
+    }),
+    ...(theme === "dark" && {
+      card: "bg-neutral-700 hover:bg-violet-600 ease-linear transition-all",
+      title: "text-neutral-200 group-hover/minicard:text-neutral-300",
+    }),
+  };
 
   if (title.length <= 0) title = "title";
   return (
     <div
       className={twMerge(
         "h-full aspect-square rounded flex flex-col items-center p-2 group/minicard",
-        cardStyle!
+        styles.card
       )}
     >
       <span
         className={twMerge(
-          titleStyle!,
-          "cursor-default select-none transition-all ease-linear text-sm text-nowrap"
+          styles.title,
+          "cursor-default select-none transition-all ease-linear text-nowrap text-sm"
         )}
       >
         {capitalize(title)}

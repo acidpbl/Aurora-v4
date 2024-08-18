@@ -17,7 +17,7 @@ interface SettingsCardProps {
 export function SettingsCard(props: SettingsCardProps) {
   return (
     <Settings.Root>
-      <Settings.Dropdown
+      {/* <Settings.Dropdown
         options={[
           { icon: US, value: "english" },
           { icon: BR, value: "portuguese" },
@@ -25,7 +25,7 @@ export function SettingsCard(props: SettingsCardProps) {
         ]}
         defaultOption={{ icon: US, value: "english" }}
         icon={PiGlobeFill}
-      ></Settings.Dropdown>
+      /> */}
       <Settings.Toggle
         icon={{ toggle: PiMoonFill, toggled: PiSunFill }}
         toggled={props.theme.states.theme == "light" ? false : true}

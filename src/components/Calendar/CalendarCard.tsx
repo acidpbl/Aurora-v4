@@ -10,6 +10,11 @@ import {
 } from "react-icons/pi";
 import ThemeContext from "../../ThemeContext";
 
+type ThemeStyles = {
+  month: string;
+  currentMonth: string;
+};
+
 export function CalendarCard() {
   const [monthDisplay, setMonthDisplay] = useState("");
   const hook = useCalendar();
@@ -97,41 +102,39 @@ export function CalendarCard() {
 
   const theme = useContext(ThemeContext);
 
-  let monthStyle: string, currentMonthStyle: string;
-
-  switch (theme) {
-    case "light":
-      monthStyle = "text-neutral-800";
-      currentMonthStyle = "text-violet-500";
-      break;
-    case "dark":
-      monthStyle = "text-violet-400";
-      currentMonthStyle = "text-violet-600";
-      break;
-
-    default:
-      break;
-  }
+  const styles: ThemeStyles = {
+    month: "text-neutral-800",
+    currentMonth: "text-neutral-500",
+    ...(theme === "light" && {
+      month: "text-neutral-800",
+      currentMonth: "text-violet-600",
+    }),
+    ...(theme === "dark" && {
+      month: "text-neutral-200",
+      currentMonth: "text-violet-400",
+    }),
+  };
 
   return (
     <Card.Root variant="sm" title="Calendar">
-      <div className="w-full flex flex-col gap-4">
-        <div className={twMerge("w-full flex justify-between pl-4")}>
+      <div className="flex flex-col gap-2">
+        <div className="flex justify-between pl-1">
           <div className="flex items-center gap-2">
             <span
               className={twMerge(
                 monthDisplay ===
                   new Date().toLocaleDateString("en-us", { month: "long" })
-                  ? currentMonthStyle!
-                  : monthStyle!
+                  ? styles.currentMonth
+                  : styles.month,
+                ""
               )}
             >
               {hook.states.dateDisplay}
             </span>
-            <span className="text-xs text-violet-500">
+            <span className={twMerge("text-xs ", styles.currentMonth)}>
               {monthDisplay ===
               new Date().toLocaleDateString("en-us", { month: "long" })
-                ? "(today)"
+                ? "(current)"
                 : null}
             </span>
           </div>
@@ -150,7 +153,7 @@ export function CalendarCard() {
             />
           </div>
         </div>
-        <div className="w-full flex flex-col gap-2">
+        <div className={twMerge("flex flex-col rounded overflow-hidden")}>
           <Calendar.Weekdays nav={hook.states.nav} />
           <Calendar.Days days={hook.states.days} />
         </div>

@@ -24,12 +24,12 @@ export function ToggleButton({
   switch (theme) {
     case "light":
       btnStyle = props.toggled
-        ? "bg-amber-500 hover:bg-amber-600 text-violet-200 hover:text-violet-300"
+        ? "bg-amber-500 hover:bg-amber-600 text-amber-200 hover:text-amber-300"
         : "bg-violet-500 hover:bg-violet-600 text-violet-200 hover:text-violet-300";
       break;
     case "dark":
       btnStyle = props.toggled
-        ? "bg-amber-600 hover:bg-amber-700 text-violet-200 hover:text-violet-300"
+        ? "bg-amber-600 hover:bg-amber-700 text-amber-200 hover:text-amber-300"
         : "bg-violet-600 hover:bg-violet-700 text-violet-200 hover:text-violet-300";
       break;
     default:
