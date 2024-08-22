@@ -41,7 +41,18 @@ export function PomodoroCard() {
 
   const [focusRepeat, setFocusRepeat] = useState(false);
 
-  const [focusTimes, setFocusTimes] = useState(0);
+  const [focusTimes, setFocusTimes] = useState<number>(() => {
+    const savedFocusTimes = localStorage.getItem("focusTimes");
+    return savedFocusTimes ? parseInt(savedFocusTimes, 10) : 0;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("focusTimes", focusTimes.toString());
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+    }
+  }, [focusTimes]);
 
   useEffect(() => {
     const progressPercentage = (pomodoroTime / (25 * 60)) * 100;

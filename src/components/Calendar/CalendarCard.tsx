@@ -7,6 +7,7 @@ import {
   PiCaretLeftBold,
   PiCaretRightBold,
   PiCircleBold,
+  PiCircleFill,
 } from "react-icons/pi";
 import ThemeContext from "../../ThemeContext";
 
@@ -16,6 +17,7 @@ type ThemeStyles = {
 };
 
 export function CalendarCard() {
+  const [yearDisplay, setYearDisplay] = useState("");
   const [monthDisplay, setMonthDisplay] = useState("");
   const hook = useCalendar();
 
@@ -51,6 +53,7 @@ export function CalendarCard() {
       month: "numeric",
       day: "numeric",
     });
+    setYearDisplay(firstDayOfMonth.getFullYear().toString());
 
     hook.actions.setDateDisplay(
       `${now.toLocaleDateString("en-us", { month: "long" })} ${year}`
@@ -119,32 +122,40 @@ export function CalendarCard() {
     <Card.Root variant="sm" title="Calendar">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between pl-1">
-          <div className="flex items-center gap-2">
-            <span
-              className={twMerge(
-                monthDisplay ===
-                  new Date().toLocaleDateString("en-us", { month: "long" })
-                  ? styles.currentMonth
-                  : styles.month,
-                ""
-              )}
-            >
-              {hook.states.dateDisplay}
-            </span>
-            <span className={twMerge("text-xs ", styles.currentMonth)}>
-              {monthDisplay ===
-              new Date().toLocaleDateString("en-us", { month: "long" })
-                ? "(current)"
-                : null}
-            </span>
-          </div>
-          <div className="flex gap-2">
+          <div className="w-full flex gap-2">
             <Calendar.Button
               icon={PiCaretLeftBold}
               onClick={hook.actions.handlePrevMonth}
             />
+            <div className="flex gap-1 items-center w-full">
+              <span
+                className={twMerge(
+                  monthDisplay ===
+                    new Date().toLocaleDateString("en-us", { month: "long" }) &&
+                    yearDisplay == new Date().getFullYear().toString()
+                    ? styles.currentMonth
+                    : styles.month,
+                  ""
+                )}
+              >
+                {hook.states.dateDisplay}
+              </span>
+              <span className={twMerge("text-xs ", styles.currentMonth)}>
+                {monthDisplay ===
+                  new Date().toLocaleDateString("en-us", { month: "long" }) &&
+                yearDisplay == new Date().getFullYear().toString()
+                  ? "(current)"
+                  : null}
+              </span>
+            </div>
             <Calendar.Button
-              icon={PiCircleBold}
+              icon={
+                monthDisplay ===
+                  new Date().toLocaleDateString("en-us", { month: "long" }) &&
+                yearDisplay == new Date().getFullYear().toString()
+                  ? PiCircleFill
+                  : PiCircleBold
+              }
               onClick={() => hook.actions.setNav(0)}
             />
             <Calendar.Button

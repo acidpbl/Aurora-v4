@@ -8,7 +8,8 @@ import { WeatherCard } from "./components/Weather/WeatherCard";
 import { PomodoroCard } from "./components/Pomodoro/PomodoroCard";
 import { SettingsCard } from "./components/SettingsCard/SettingsCard";
 import { FooterCard } from "./components/Footer/FooterCard";
-import { Card } from "./components/Card";
+import { FavoritesCard } from "./components/Favorites/FavoritesCard";
+
 function App() {
   const themeHook = useTheme();
 
@@ -24,7 +25,7 @@ function App() {
           <WeatherCard />
           <StopwatchCard />
           <TimerCard />
-          <Card.Root variant="sm" children={""} title="Coming soon" />
+          <FavoritesCard />
           <PomodoroCard />
         </div>
         <FooterCard />

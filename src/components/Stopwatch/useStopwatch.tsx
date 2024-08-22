@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useStopwatch() {
   const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(0);
 
-  const [savedTime, setSavedTime] = useState<string[]>([]);
+  const [savedTime, setSavedTime] = useState<string[]>(() => {
+    const savedTimeData = localStorage.getItem("stopwatchSaved");
+    try {
+      return savedTimeData ? JSON.parse(savedTimeData) : [];
+    } catch (error) {
+      console.error("Error parsing JSON from localStorage:", error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("stopwatchSaved", JSON.stringify(savedTime));
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+    }
+  }, [savedTime]);
 
   function handleRun() {
     setIsRunning((prev) => !prev);

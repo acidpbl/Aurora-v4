@@ -24,7 +24,7 @@ export function Input(props: InputProps) {
   }
   if (theme == "dark") {
     inputStyle =
-      "bg-neutral-700 hover:bg-neutral-800 ease-linear transition-all placeholder:text-violet-300 text-violet-200";
+      "bg-neutral-600 hover:bg-neutral-700 ease-linear transition-all placeholder:text-violet-300 text-violet-200";
     btnStyle =
       "bg-violet-600 hover:bg-violet-700 ease-linear transition-all text-violet-200 hover:text-violet-300";
   }

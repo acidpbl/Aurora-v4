@@ -69,7 +69,7 @@ export function FooterCard() {
           />
           <Footer.LinkButton
             icon={PiInstagramLogoFill}
-            title="insta"
+            title="instagram"
             href="https://instagram.com/pabloalbrnz"
           />
           <Footer.LinkButton
@@ -117,7 +117,7 @@ export function FooterCard() {
           />
           <Footer.LinkButton
             icon={PiInstagramLogoFill}
-            title="insta"
+            title="instagram"
             href="https://instagram.com/otto.gioia/"
           />
           <Footer.LinkButton

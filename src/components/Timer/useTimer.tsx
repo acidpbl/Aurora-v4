@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useTimer() {
   const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(Number(""));
   const [toggle, setToggle] = useState(false);
 
-  const [savedTime, setSavedTime] = useState<string[]>([]);
+  const [savedTime, setSavedTime] = useState<string[]>(() => {
+    const savedTimeData = localStorage.getItem("timerSaved");
+    try {
+      return savedTimeData ? JSON.parse(savedTimeData) : [];
+    } catch (error) {
+      console.error("Error parsing JSON from localStorage:", error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("timerSaved", JSON.stringify(savedTime));
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+    }
+  }, [savedTime]);
 
   function handleTimerChange(newTimer: number) {
     setTime(newTimer);

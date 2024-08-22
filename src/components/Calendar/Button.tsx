@@ -20,7 +20,7 @@ export function Button({ icon: Icon, ...props }: ButtonProps) {
       btn: "bg-violet-500 text-violet-200 hover:text-violet-300",
     }),
     ...(theme == "dark" && {
-      btn: "bg-violet-600 text-neutral-800 hover:text-neutral-950",
+      btn: "bg-violet-600 text-violet-200 hover:text-violet-300",
     }),
   };
 
