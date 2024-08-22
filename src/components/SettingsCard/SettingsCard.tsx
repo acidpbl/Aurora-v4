@@ -1,5 +1,5 @@
-import { US, BR, ES } from "country-flag-icons/react/1x1";
-import { PiGlobeFill, PiMoonFill, PiSunFill } from "react-icons/pi";
+// import { US, BR, ES } from "country-flag-icons/react/1x1";
+import { PiMoonFill, PiSunFill } from "react-icons/pi";
 import { Settings } from ".";
 
 interface SettingsCardProps {

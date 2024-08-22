@@ -64,7 +64,7 @@ export function Time({}: TimeProps) {
   return (
     <span
       className={twMerge(
-        "w-full flex justify-center rounded-md text-6xl md:text-7xl font-medium py-8 select-none transition-all ease-linear",
+        "w-full flex justify-center rounded-md text-6xl font-medium py-8 select-none transition-all ease-linear",
         styles.theme
       )}
       onClick={() => {
