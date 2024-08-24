@@ -14,7 +14,9 @@ interface ToggleButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function ToggleButton({
   label = { toggle: "toggle", toggled: "toggled" },
+  icon: { toggle: IconToggle, toggled: IconToggled },
   side = "left",
+  toggled,
   ...props
 }: ToggleButtonProps) {
   const theme = useContext(ThemeContext);
@@ -23,12 +25,12 @@ export function ToggleButton({
 
   switch (theme) {
     case "light":
-      btnStyle = props.toggled
+      btnStyle = toggled
         ? "bg-amber-500 hover:bg-amber-600 text-amber-200 hover:text-amber-300"
         : "bg-violet-500 hover:bg-violet-600 text-violet-200 hover:text-violet-300";
       break;
     case "dark":
-      btnStyle = props.toggled
+      btnStyle = toggled
         ? "bg-amber-600 hover:bg-amber-700 text-amber-200 hover:text-amber-300"
         : "bg-violet-600 hover:bg-violet-700 text-violet-200 hover:text-violet-300";
       break;
@@ -47,17 +49,13 @@ export function ToggleButton({
     >
       {side === "left" ? (
         <>
-          {props.toggled ? <props.icon.toggled /> : <props.icon.toggle />}
-          <span>
-            {capitalize(props.toggled ? label.toggled : label.toggle)}
-          </span>
+          {toggled ? <IconToggled /> : <IconToggle />}
+          <span>{capitalize(toggled ? label.toggled : label.toggle)}</span>
         </>
       ) : (
         <>
-          <span>
-            {capitalize(props.toggled ? label.toggled : label.toggle)}
-          </span>
-          {props.toggled ? <props.icon.toggled /> : <props.icon.toggle />}
+          <span>{capitalize(toggled ? label.toggled : label.toggle)}</span>
+          {toggled ? <IconToggled /> : <IconToggle />}
         </>
       )}
     </button>

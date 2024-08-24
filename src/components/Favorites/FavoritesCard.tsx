@@ -97,8 +97,10 @@ export function FavoritesCard() {
     <Card.Root variant="sm" title="Favorites">
       <div className="flex flex-wrap gap-2">
         {items &&
-          items.map((item) => {
-            return <Favorites.Icon link={item.link} title={item.title} />;
+          items.map((item, index) => {
+            return (
+              <Favorites.Icon key={index} link={item.link} title={item.title} />
+            );
           })}
         <div className="p-2">
           <button

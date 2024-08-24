@@ -16,6 +16,7 @@ export function IconButton({
   label = "butotn",
   side = "left",
   variant = "primary",
+  icon: Icon,
   ...props
 }: IconButtonProps) {
   const theme = useContext(ThemeContext);
@@ -76,13 +77,13 @@ export function IconButton({
     >
       {side === "left" ? (
         <>
-          <props.icon />
+          <Icon />
           <span>{capitalize(label)}</span>
         </>
       ) : (
         <>
           <span>{capitalize(label)}</span>
-          <props.icon />
+          <Icon />
         </>
       )}
     </button>

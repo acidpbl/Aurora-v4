@@ -5,7 +5,6 @@ import { useTheme } from "./useTheme";
 import { CalendarCard } from "./components/Calendar/CalendarCard";
 import { TimerCard } from "./components/Timer/TimerCard";
 import { WeatherCard } from "./components/Weather/WeatherCard";
-import { PomodoroCard } from "./components/Pomodoro/PomodoroCard";
 import { SettingsCard } from "./components/SettingsCard/SettingsCard";
 import { FooterCard } from "./components/Footer/FooterCard";
 import { FavoritesCard } from "./components/Favorites/FavoritesCard";
@@ -26,7 +25,6 @@ function App() {
           <StopwatchCard />
           <TimerCard />
           <FavoritesCard />
-          <PomodoroCard />
         </div>
         <FooterCard />
       </div>

@@ -38,10 +38,12 @@ export function CardRoot({ title = "title", ...props }: CardRootProps) {
       variant = "col-span-1 w-full aspect-square h-full";
       break;
     case "md":
-      variant = "col-span-2 w-full h-full";
+      variant =
+        "col-span-1 aspect-square md:aspect-auto md:col-span-2 w-full h-full";
       break;
     case "lg":
-      variant = "col-span-3 w-full h-full";
+      variant =
+        "col-span-1 aspect-square md:aspect-auto md:col-span-3 w-full h-full";
       break;
     default:
       break;

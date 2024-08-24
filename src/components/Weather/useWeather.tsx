@@ -30,7 +30,6 @@ export function useWeather() {
       try {
         const fetchedData = await getWeatherData(city);
         setData(fetchedData);
-        console.log(fetchedData);
       } catch (error) {
         console.error("Error fetching weather data:", error);
         setData(undefined);
