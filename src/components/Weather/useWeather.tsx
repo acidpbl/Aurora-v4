@@ -6,35 +6,37 @@ import {
 
 export function useWeather() {
   const [city, setCity] = useState<string>(() => {
-    const savedCity = localStorage.getItem("city");
-    return savedCity || "";
+    return localStorage.getItem("city") || "";
   });
 
-  const [data, setData] = useState<IGetWeatherDataResponse | undefined>(() => {
-    const savedData = localStorage.getItem("weatherData");
-    try {
-      return savedData
-        ? (JSON.parse(savedData) as IGetWeatherDataResponse)
-        : undefined;
-    } catch (error) {
-      console.error("Error parsing JSON from localStorage:", error);
-      return undefined;
-    }
-  });
+  const [data, setData] = useState<IGetWeatherDataResponse | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    localStorage.setItem("city", city);
+    if (city) {
+      localStorage.setItem("city", city);
+    }
   }, [city]);
 
   useEffect(() => {
-    if (data) {
+    if (city) {
+      getCityWeather();
+    }
+  }, []);
+
+  async function getCityWeather() {
+    if (checkIfInputExists(city)) {
       try {
-        localStorage.setItem("weatherData", JSON.stringify(data));
+        const fetchedData = await getWeatherData(city);
+        setData(fetchedData);
+        console.log(fetchedData);
       } catch (error) {
-        console.error("Error saving to localStorage:", error);
+        console.error("Error fetching weather data:", error);
+        setData(undefined);
       }
     }
-  }, [data]);
+  }
 
   function handleCityChange(newCity: string) {
     setCity(newCity);
@@ -47,20 +49,6 @@ export function useWeather() {
 
     setData(undefined);
     return false;
-  }
-
-  async function getCityWeather() {
-    if (checkIfInputExists(city)) {
-      try {
-        const fetchedData = await getWeatherData(city);
-        setData(fetchedData);
-        setCity("");
-        console.log(fetchedData);
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
-        setData(undefined);
-      }
-    }
   }
 
   return {

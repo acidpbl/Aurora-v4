@@ -6,6 +6,7 @@ interface TooltipProps {
   text: string;
   children: ReactNode;
   direction: "up" | "down";
+  custom?: string;
 }
 
 type ThemeStyle = {
@@ -35,7 +36,12 @@ export function Tooltip(props: TooltipProps) {
 
   return (
     <>
-      <div className="relative flex items-center justify-center text-center group/tooltip">
+      <div
+        className={twMerge(
+          "relative flex items-center justify-center text-center group/tooltip",
+          props.custom
+        )}
+      >
         {props.children}
         <span
           className={twMerge(

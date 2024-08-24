@@ -12,6 +12,7 @@
   "dependencies": {
     "@radix-ui/react-progress": "^1.0.3",
     "country-flag-icons": "^1.5.9",
+    "framer-motion": "^11.3.30",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",

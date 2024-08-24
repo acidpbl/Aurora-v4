@@ -9,6 +9,7 @@ export interface IGetWeatherDataResponse {
   temp_min: number;
   temp_max: number;
   name: string;
+  weather: string;
 }
 
 export async function getWeatherData(
@@ -32,6 +33,7 @@ export async function getWeatherData(
         feels_like: data.main.feels_like,
         temp_min: data.main.temp_min,
         temp_max: data.main.temp_max,
+        weather: data.weather[0].main,
       };
     });
 

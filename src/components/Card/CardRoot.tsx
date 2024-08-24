@@ -31,9 +31,6 @@ export function CardRoot({ title = "title", ...props }: CardRootProps) {
       card: "bg-neutral-800",
       title: "text-neutral-200",
     }),
-    ...(props.variant === "sm" && {
-      content: "aspect-square",
-    }),
   };
 
   switch (props.variant) {

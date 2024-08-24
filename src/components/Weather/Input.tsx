@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
 import ThemeContext from "../../ThemeContext";
 import { twMerge } from "tailwind-merge";
-import { useWeather } from "./useWeather";
+
 interface InputProps {
   changeCity: (newCity: string) => void;
   city: string;
@@ -12,7 +12,7 @@ interface InputProps {
 export function Input(props: InputProps) {
   const theme = useContext(ThemeContext);
 
-  const weather = useWeather();
+  const [inputValue, setInputValue] = useState("");
 
   let inputStyle: string, btnStyle: string;
 
@@ -41,18 +41,18 @@ export function Input(props: InputProps) {
         type="string"
         name=""
         id="weatherInput"
-        value={props.city}
+        value={inputValue}
         className={twMerge(
           "w-full p-2 h-8 rounded-l outline-none",
           inputStyle!
         )}
-        placeholder="CEP"
+        placeholder={props.city || "Your City"}
         onChange={(e) => {
-          props.changeCity(e.target.value);
-          weather.actions.setData(undefined);
+          setInputValue(e.target.value);
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
+            props.changeCity(inputValue);
             props.getCityWeather();
           }
         }}
@@ -60,7 +60,10 @@ export function Input(props: InputProps) {
       <button
         type="submit"
         className={twMerge("p-2 rounded-r", btnStyle!)}
-        onClick={props.getCityWeather}
+        onClick={() => {
+          props.changeCity(inputValue);
+          props.getCityWeather();
+        }}
       >
         <PiMagnifyingGlassBold />
       </button>
